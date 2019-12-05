@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
     public float restartDelay = 1f;
     public GameObject completeLevelUI;
     public GameObject player;
+    public Transform playerTransform;
+    public GameObject finalScoreScr;
+    public Vector3 arrestMotion = Vector3.zero;
+    
 
     public void EndGame()
     {
@@ -26,8 +30,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void CompleteLevel()
-    {
-        Debug.Log("Level Complete!");
+    {        Debug.Log("Level Complete!");
+        //arresting the player object motion when it hits the end trigger
+        player.GetComponent<Rigidbody>().velocity = arrestMotion;
+        player.GetComponent<Rigidbody>().angularVelocity = arrestMotion;
+
         player.GetComponent<PlayerMovement>().enabled = false;
         completeLevelUI.SetActive(true);
     }
